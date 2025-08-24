@@ -167,7 +167,8 @@ def identify_cascading_impact(schedule_for_day):
 @st.cache_data
 def load_data():
     try:
-        data = pd.read_csv('../data/Cleaned_Flight_Data.csv', parse_dates=['Date', 'Scheduled_Departure', 'Actual_Departure', 'Scheduled_Arrival', 'Actual_Arrival'])
+        # Use absolute path from repo root
+        data = pd.read_csv('flight-scheduling/data/Cleaned_Flight_Data.csv', parse_dates=['Date', 'Scheduled_Departure', 'Actual_Departure', 'Scheduled_Arrival', 'Actual_Arrival'])
         return data
     except FileNotFoundError:
         return None
