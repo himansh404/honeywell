@@ -3,6 +3,7 @@ import pandas as pd
 import plotly.express as px
 import numpy as np
 import io
+import os
 
 st.set_page_config(layout="wide", page_title="Flight-Ops AI Co-Pilot")
 
@@ -167,8 +168,10 @@ def identify_cascading_impact(schedule_for_day):
 @st.cache_data
 def load_data():
     try:
-        # Use absolute path from repo root
-        data = pd.read_csv('flight-scheduling/data/Cleaned_Flight_Data.csv', parse_dates=['Date', 'Scheduled_Departure', 'Actual_Departure', 'Scheduled_Arrival', 'Actual_Arrival'])
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        project_root = os.path.dirname(script_dir)
+        file_path = os.path.join(project_root, 'data', 'Cleaned_Flight_Data.csv')
+        data = pd.read_csv(file_path, parse_dates=['Date', 'Scheduled_Departure', 'Actual_Departure', 'Scheduled_Arrival', 'Actual_Arrival'])
         return data
     except FileNotFoundError:
         return None
